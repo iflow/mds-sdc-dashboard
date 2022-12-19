@@ -27,3 +27,10 @@ jobs:
         push: true
         tags: index.docker.io/malidkan/mds-sdc-dashboard:${{ github.sha }}
         file: ./Dockerfile
+
+    - name: Azure WebApp
+      uses: Azure/webapps-deploy@v2.2.5
+      with:
+        app-name: mds-sdc-dashboard
+        publish-profile: ${{ secrets.AZURE_PUBLISH_SETTINGS }}
+        images: index.docker.io/malidkan/mds-sdc-dashboard:${{ github.sha }}
