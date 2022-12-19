@@ -1,0 +1,8 @@
+pandas
+seaborn
+matplotlib
+ipywidgets
+ipyvuetify
+bqplot
+voila
+openpyxl
