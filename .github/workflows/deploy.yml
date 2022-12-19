@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Docker Login
+      uses: docker/login-action@v2.1.0
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        logout: false
+    
+    - name: Build and push docker images
+      uses: docker/build-push-action@v3.2.0
+      with:
+        push: true
+        tags: index.docker.io/malidkan/mds-sdc-dashboard:${{ github.sha }}
+        file: ./Dockerfile
